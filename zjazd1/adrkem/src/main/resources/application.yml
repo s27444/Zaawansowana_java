@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: adrkem
+my:
+  custom:
+    property: Hello from application properties
