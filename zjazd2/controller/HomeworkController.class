@@ -1,0 +1,35 @@
+package com.example.zjazd2;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/homework")
+public class HomeworkController {
+
+    @GetMapping("/{pathVariable}")
+    public String getPathVariable(@PathVariable String pathVariable) {
+        return "PathVariable: " + pathVariable;
+    }
+
+    @GetMapping
+    public String getRequestParam(@RequestParam String requestParam) {
+        return "RequestParam: " + requestParam;
+    }
+
+    @PutMapping("/{pathVariable}")
+    public String updateData(@PathVariable String pathVariable, @RequestBody String body) {
+        return "Updated " + pathVariable + " with body: " + body;
+    }
+
+    @PostMapping
+    public String postData(@RequestBody String body) {
+        return "Posted with body: " + body;
+    }
+
+    @DeleteMapping("/{pathVariable}")
+    public ResponseEntity<Void> deleteData(@PathVariable String pathVariable) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+}
