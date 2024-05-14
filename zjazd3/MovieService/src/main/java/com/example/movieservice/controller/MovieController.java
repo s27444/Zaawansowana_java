@@ -3,7 +3,6 @@ package com.example.movieservice.controller;
 import com.example.movieservice.exception.MovieNotFoundException;
 import com.example.movieservice.model.Movie;
 import com.example.movieservice.service.MovieService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,11 +32,17 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-        if (movie.getName() == null || movie.getCategory() == null || movie.getDirector() == null || movie.getReleaseYear() == 0) {
-            return ResponseEntity.badRequest().build();
-        }
-        Movie createdMovie = movieService.addMovie(movie);
-        return ResponseEntity.ok(createdMovie);
+        return movieService.addMovie(movie);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) throws MovieNotFoundException {
+        return movieService.updateMovie(id, movie);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable int id) throws MovieNotFoundException {
+        return movieService.deleteMovie(id);
     }
 
 }
