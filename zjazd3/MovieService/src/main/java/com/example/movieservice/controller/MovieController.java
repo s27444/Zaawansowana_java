@@ -25,7 +25,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) throws MovieNotFoundException {
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) throws MovieNotFoundException {
         Movie movie = movieService.getMovieById(id);
         return ResponseEntity.ok(movie);
     }
@@ -36,13 +36,17 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) throws MovieNotFoundException {
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) throws MovieNotFoundException {
         return movieService.updateMovie(id, movie);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable int id) throws MovieNotFoundException {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) throws MovieNotFoundException {
         return movieService.deleteMovie(id);
     }
 
+    @PatchMapping("/{id}/makeAvailable")
+    public ResponseEntity<Void> makeMovieAvailable(@PathVariable Long id) throws MovieNotFoundException {
+        return movieService.makeMovieAvailable(id);
+    }
 }

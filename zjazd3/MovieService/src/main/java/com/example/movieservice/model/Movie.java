@@ -1,24 +1,37 @@
 package com.example.movieservice.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "movies")
 public class Movie {
-    private int id;
+    @Id
+    private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "category")
     private String category;
+
+    @Column(name = "director")
     private String director;
+
+    @Column(name = "release_year")
     private int releaseYear;
 
-    public Movie(int id, String name, String category, String director, int releaseYear) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.director = director;
-        this.releaseYear = releaseYear;
-    }
+    @Column(name = "is_available", nullable = false, columnDefinition = "boolean default false")
+    private boolean isAvailable;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,5 +65,13 @@ public class Movie {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }
